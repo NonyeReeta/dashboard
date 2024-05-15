@@ -76,6 +76,16 @@ section {
     opacity: 0.5;
 }
 
+.not-found {
+    flex-direction: column;
+    gap: 30px;
+}
+
+.not-found > i {
+    color: #f15d5d;
+    font-size: 100px;
+}
+
 @media only screen and (min-width: 1200px) {
     section {
         padding: 40PX 10% 0;
