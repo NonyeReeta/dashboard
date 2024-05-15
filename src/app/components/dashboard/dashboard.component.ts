@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
+import { PageService } from 'src/app/services/page.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,23 +17,32 @@ import { User } from 'src/app/interfaces/user';
 export class DashboardComponent implements OnInit {
 
   users: User[] = [];
-  is_loading:boolean = true;
-  current_page:number = 0;
+  is_loading:boolean = false;
+  current_page:number = 1;
 
   constructor(
     private userService: UserService,
+    private pageService: PageService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.loadUsers(1);
+    this.userService.currentUserList.subscribe(user => {
+      if(user.length === 0) {
+        this.loadUsers(1);
+      } else {
+        this.users = user;
+      }
+    })
+   
   }
 
   loadUsers(page_number: number) {
     this.userService.getRequest(`users?page=${page_number}`).subscribe(res => {
       this.users = res.data;
-      console.log(this.users);
+      this.userService.updateUsers(res.data);
       this.current_page = page_number;
+      this.pageService.updateCurrentPage(page_number);
       this.is_loading = false;
     })
   }

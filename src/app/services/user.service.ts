@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
 import { environment } from 'src/environments/environment';
+import { User } from '../interfaces/user';
 
 interface ResponseObject {
   page: number,
@@ -19,7 +20,9 @@ export class UserService {
 
   api_link: string = environment.base_url;
 
-  users: BehaviorSubject<[]> = new BehaviorSubject<[]>([]);
+  private usersSubject = new BehaviorSubject<User[]>([]);
+
+  currentUserList = this.usersSubject.asObservable();
 
   constructor(
     private httpClient: HttpClient,
@@ -29,11 +32,11 @@ export class UserService {
     return this.httpClient.get<ResponseObject>(this.api_link + endpoint);
   }
 
-  updateUsers(new_users: []) {
-    this.users.next(new_users)
+  updateUsers(new_users: User[]) {
+    this.usersSubject.next(new_users)
   }
 
   getUsers() {
-    return this.users.getValue();
+    return this.usersSubject.getValue();
   }
 }

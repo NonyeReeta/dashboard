@@ -1,3 +1,3 @@
 <header>
-    <input id="search" type="text" placeholder="Search user by ID">
+    <input id="search" type="number" placeholder="Search user by ID e.g 4" [(ngModel)]="search_term" (ngModelChange)="searchUsers()">
 </header>
