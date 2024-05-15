@@ -1,21 +1,34 @@
 <app-header></app-header>
-<section class="users-holder flex-j-a-center">
-    <div class="user flex-j-a-center">
-        <figure class="profile-picture">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL5UzYw8VaQbvtKpStN_w3PkI9RnqpgTBP5k0xG4loTQ&s" alt="username">
-        </figure>
-        <p class="username">Patrice Miahelo</p>
+<section>
+    <div class="flex-j-a-center" *ngIf="is_loading">
+        <mat-spinner></mat-spinner>
     </div>
-    <div class="user flex-j-a-center">
-        <figure class="profile-picture">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL5UzYw8VaQbvtKpStN_w3PkI9RnqpgTBP5k0xG4loTQ&s" alt="username">
-        </figure>
-        <p class="username">Patrice Miahelo</p>
+    <div class="users-holder flex-j-a-center animate__animated animate__lightSpeedInRight" *ngIf="is_loading === false" >
+        <div class="user flex-j-a-center" *ngFor="let user of users">
+            <figure class="profile-picture">
+                <img [src]="user.avatar" [alt]="user.first_name" loading="lazy">
+            </figure>
+            <div class="user-details">
+                <p>{{user.first_name + ' ' + user.last_name}}</p>
+                <p>{{user.email}}</p>
+            </div>
+        </div>
     </div>
-    <div class="user flex-j-a-center">
-        <figure class="profile-picture">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL5UzYw8VaQbvtKpStN_w3PkI9RnqpgTBP5k0xG4loTQ&s" alt="username">
-        </figure>
-        <p class="username">Patrice Miahelo</p>
+    <!-- pagination -->
+    <div class="pagination flex-j-a-center" *ngIf="is_loading === false">
+        <div class="btn previous flex-j-a-center" [class.disabled]="current_page === 1"  (click)="loadUsers(current_page - 1)">
+            Prev
+        </div>
+        <div class="pages flex-j-a-center">
+            <div class="btn flex-j-a-center page-number" [ngClass]="{'current-page' : current_page === 1}" (click)="loadUsers(1)">
+                1
+            </div>
+            <div class="btn flex-j-a-center page-number" [ngClass]="{'current-page' : current_page === 2}" (click)="loadUsers(2)">
+                2
+            </div>
+        </div>
+        <div class="btn next flex-j-a-center" [class.disabled]="current_page > 1" (click)="loadUsers(current_page + 1)">
+            Next
+        </div>
     </div>
 </section>

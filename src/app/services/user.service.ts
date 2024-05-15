@@ -1,9 +1,39 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs";
+import { environment } from 'src/environments/environment';
+
+interface ResponseObject {
+  page: number,
+  per_page: number,
+  total: number,
+  total_pages: number,
+  data?: any,
+  support: any
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  api_link: string = environment.base_url;
+
+  users: BehaviorSubject<[]> = new BehaviorSubject<[]>([]);
+
+  constructor(
+    private httpClient: HttpClient,
+  ) { }
+
+  getRequest(endpoint: string) {
+    return this.httpClient.get<ResponseObject>(this.api_link + endpoint);
+  }
+
+  updateUsers(new_users: []) {
+    this.users.next(new_users)
+  }
+
+  getUsers() {
+    return this.users.getValue();
+  }
 }
