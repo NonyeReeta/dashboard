@@ -1,0 +1,21 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #161616;
+    color: #e5e5e5;
+    padding: 20px 0;
+}
+
+#search {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#search::placeholder {
+    color: #161616
+}
+
+#search:active {
+    border: 1px solid #161616;
+}
