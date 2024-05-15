@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   search_term:string = '';
   users: any[] = [];
   current_page:number = 0;
+  not_found:boolean =false;
 
   constructor(
     private userService: UserService,
@@ -28,6 +29,9 @@ export class HeaderComponent implements OnInit {
         this.current_page = page
       }
     )
+    this.pageService.notFound$.subscribe(is_found => {
+      this.not_found = is_found
+    })
     this.userService.currentUserList.subscribe(users => {
       this.users = users
     })
@@ -43,10 +47,17 @@ export class HeaderComponent implements OnInit {
 
   searchUsers() {
     if(!this.search_term) {
+      this.getUsers(this.current_page);
+      this.pageService.updateNotFound(true);
+      this.not_found = true;
     } else {
       const query = Number(this.search_term);
       this.users = this.users.filter(user => user.id === query);
       this.userService.updateUsers(this.users);
+      if(this.users.length === 0) {
+        this.pageService.updateNotFound(false);
+        this.not_found = false;
+      }
     }
   }
 }

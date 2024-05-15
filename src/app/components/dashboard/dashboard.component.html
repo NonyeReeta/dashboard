@@ -3,7 +3,7 @@
     <div class="flex-j-a-center" *ngIf="is_loading">
         <mat-spinner></mat-spinner>
     </div>
-    <div class="users-holder flex-j-a-center animate__animated animate__lightSpeedInRight" *ngIf="is_loading === false" >
+    <div class="users-holder flex-j-a-center animate__animated animate__lightSpeedInRight" *ngIf="is_loading === false && user_found === true" >
         <div class="user flex-j-a-center" *ngFor="let user of users" (click)="viewUserDetails(user.id)">
             <figure class="profile-picture">
                 <img [src]="user.avatar" [alt]="user.first_name" loading="lazy">
@@ -15,7 +15,7 @@
         </div>
     </div>
     <!-- pagination -->
-    <div class="pagination flex-j-a-center" *ngIf="is_loading === false">
+    <div class="pagination flex-j-a-center" *ngIf="is_loading === false && user_found === true">
         <div class="btn previous flex-j-a-center" [class.disabled]="current_page === 1"  (click)="loadUsers(current_page - 1)">
             Prev
         </div>
@@ -30,5 +30,10 @@
         <div class="btn next flex-j-a-center" [class.disabled]="current_page > 1" (click)="loadUsers(current_page + 1)">
             Next
         </div>
+    </div>
+    <!-- user not found -->
+    <div class="not-found flex-j-a-center" *ngIf="user_found === false">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>User not found. Please try again.</p>
     </div>
 </section>

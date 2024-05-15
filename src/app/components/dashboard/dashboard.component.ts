@@ -17,8 +17,9 @@ import { PageService } from 'src/app/services/page.service';
 export class DashboardComponent implements OnInit {
 
   users: User[] = [];
-  is_loading:boolean = false;
+  is_loading:boolean = true;
   current_page:number = 1;
+  user_found:boolean = true;
 
   constructor(
     private userService: UserService,
@@ -35,6 +36,10 @@ export class DashboardComponent implements OnInit {
       }
     })
    
+    this.pageService.notFound$.subscribe(is_found => {
+      this.user_found = is_found;
+      console.log(this.user_found);
+    })
   }
 
   loadUsers(page_number: number) {
