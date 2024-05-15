@@ -43,13 +43,10 @@ export class HeaderComponent implements OnInit {
 
   searchUsers() {
     if(!this.search_term) {
-      this.getUsers(this.current_page)
     } else {
       const query = Number(this.search_term);
       this.users = this.users.filter(user => user.id === query);
       this.userService.updateUsers(this.users);
-      console.log(this.current_page)
-      console.log(this.users)
     }
   }
 }
