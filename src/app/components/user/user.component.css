@@ -1,0 +1,47 @@
+section {
+    padding: 40px 20px;
+    flex-direction: column;
+}
+
+.navigation {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.navigation > i {
+    cursor: pointer;
+    border: 1px solid #161616;
+    border-radius: 50%;
+    padding: 10px;
+    transition: .5s;
+}
+
+.navigation > i:hover {
+    transform: scale(1.1);
+}
+
+.user-profile {
+    width: 300px;
+    padding: 20px;
+    background-color: #a3cacd;
+    border-radius: 28px;
+    box-shadow: 17px 9px 76px -1px rgba(0,0,0,0.74);
+    -webkit-box-shadow: 17px 9px 76px -1px rgba(0,0,0,0.74);
+    -moz-box-shadow: 17px 9px 76px -1px rgba(0,0,0,0.74);
+}
+
+.card {
+    color: #e5e3d2;
+    padding: 10px;
+    display: flex;
+}
+
+.user-details {
+    background-color: #161616;
+    color: #e5e3d2;
+    padding: 10px;
+}
+
+.profile-picture {
+    object-fit: cover;
+}

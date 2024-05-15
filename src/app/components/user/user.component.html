@@ -1,1 +1,17 @@
-<p>user works!</p>
+<section class="flex-j-a-center">
+    <div class="navigation">
+        <i class="fa-solid fa-arrow-left-long" (click)="goToDashboard()"></i>
+    </div>
+    <div class="user-profile">
+        <div class="flex-j-a-center" *ngIf="is_loading">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div class="card" *ngIf="is_loading === false">
+            <div class="user-details">
+                <h2>{{user.first_name + ' ' + user.last_name}}</h2>
+                <p>email@dhgf.com</p>
+            </div>
+            <img class="profile-picture" src="https://reqres.in/img/faces/1-image.jpg" [alt]="user.first_name" loading="lazy">
+        </div>
+    </div>
+</section>

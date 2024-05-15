@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { CommonModule, NgStyle } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
@@ -19,7 +20,8 @@ export class DashboardComponent implements OnInit {
   current_page:number = 0;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,5 +35,10 @@ export class DashboardComponent implements OnInit {
       this.current_page = page_number;
       this.is_loading = false;
     })
+  }
+
+  viewUserDetails(id: number) {
+    // route to user details page
+    this.router.navigate([`/user/${id}`]);
   }
 }
