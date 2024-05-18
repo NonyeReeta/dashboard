@@ -38,7 +38,6 @@ export class DashboardComponent implements OnInit {
    
     this.pageService.notFound$.subscribe(is_found => {
       this.user_found = is_found;
-      console.log(this.user_found);
     })
   }
 
