@@ -9,9 +9,9 @@
         <div class="card" *ngIf="is_loading === false">
             <div class="user-details">
                 <h2>{{user.first_name + ' ' + user.last_name}}</h2>
-                <p>email@dhgf.com</p>
+                <p>{{user.email}}</p>
             </div>
-            <img class="profile-picture" src="https://reqres.in/img/faces/1-image.jpg" [alt]="user.first_name" loading="lazy">
+            <img class="profile-picture" [src]="user.avatar" [alt]="user.first_name" loading="lazy">
         </div>
     </div>
 </section>
